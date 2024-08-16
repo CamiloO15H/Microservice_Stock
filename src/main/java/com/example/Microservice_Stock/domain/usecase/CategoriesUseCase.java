@@ -2,7 +2,6 @@ package com.example.Microservice_Stock.domain.usecase;
 import com.example.Microservice_Stock.domain.api.ICategoriesServicePort;
 import com.example.Microservice_Stock.domain.model.Categories;
 import com.example.Microservice_Stock.domain.spi.ICategoriesPersistencePort;
-
 import java.util.List;
 
 public class CategoriesUseCase implements ICategoriesServicePort {

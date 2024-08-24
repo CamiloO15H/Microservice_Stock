@@ -1,7 +1,8 @@
 package com.example.microservice_stock.domain.api.usecase;
 
-import com.example.microservice_stock.domain.model.Categories;
-import com.example.microservice_stock.domain.spi.ICategoriesPersistencePort;
+import stock_microservice.domain.api.usecase.CategoriesUseCase;
+import stock_microservice.domain.model.Categories;
+import stock_microservice.domain.spi.ICategoriesPersistencePort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -1,5 +1,6 @@
 package stock_microservice.adapters.driving.http.controller;
 
+import org.springframework.data.domain.Sort;
 import stock_microservice.adapters.driving.http.dto.request.AddCategoriesRequest;
 import stock_microservice.adapters.driving.http.dto.response.CategoriesResponse;
 import stock_microservice.adapters.driving.http.mapper.ICategoriesRequestMapper;
@@ -24,7 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/categories") //RUTE
 @RequiredArgsConstructor
-public class CategoriesRestController {
+public class CategoriesRestControllerAdapter {
 
     private final ICategoriesServicePort categoriesServicePort;
     private final ICategoriesRequestMapper categoriesRequestMapper;
@@ -37,9 +38,14 @@ public class CategoriesRestController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<CategoriesResponse>> getAllCategories(@RequestParam Integer page, @RequestParam Integer size) {
+    public ResponseEntity<List<CategoriesResponse>> getAllCategories(@RequestParam Integer page,
+                                                                     @RequestParam Integer size,
+                                                                     @RequestParam String sortDirection) {
+        // Validar la dirección de ordenamiento
+        Sort.Direction direction = Sort.Direction.fromString(sortDirection);
+
         return ResponseEntity.ok(categoriesResponseMapper.
-                toCategoriesResponseList(categoriesServicePort.getAllCategories(page, size)));
+                toCategoriesResponseList(categoriesServicePort.getAllCategories(page, size, direction.toString())));
     }
 
     @GetMapping("/search/{name}")

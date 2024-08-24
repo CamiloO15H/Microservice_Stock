@@ -1,12 +1,13 @@
 package com.example.microservice_stock.adapters.driving.http.controller;
 
-import com.example.microservice_stock.adapters.driving.http.dto.request.AddCategoriesRequest;
-import com.example.microservice_stock.adapters.driving.http.dto.request.UpdateCategoriesRequest;
-import com.example.microservice_stock.adapters.driving.http.dto.response.CategoriesResponse;
-import com.example.microservice_stock.adapters.driving.http.mapper.ICategoriesRequestMapper;
-import com.example.microservice_stock.adapters.driving.http.mapper.ICategoriesResponseMapper;
-import com.example.microservice_stock.domain.api.ICategoriesServicePort;
-import com.example.microservice_stock.domain.model.Categories;
+import stock_microservice.adapters.driving.http.controller.CategoriesRestControllerAdapter;
+import stock_microservice.adapters.driving.http.dto.request.AddCategoriesRequest;
+import stock_microservice.adapters.driving.http.dto.request.UpdateCategoriesRequest;
+import stock_microservice.adapters.driving.http.dto.response.CategoriesResponse;
+import stock_microservice.adapters.driving.http.mapper.ICategoriesRequestMapper;
+import stock_microservice.adapters.driving.http.mapper.ICategoriesResponseMapper;
+import stock_microservice.domain.api.ICategoriesServicePort;
+import stock_microservice.domain.model.Categories;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +23,8 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(CategoriesRestController.class) // Esto configura el test para un controlador específico
-public class CategoriesRestControllerTest {
+@WebMvcTest(CategoriesRestControllerAdapter.class) // Esto configura el test para un controlador específico
+public class CategoriesRestControllerAdapterTest {
 
     @Autowired
     private MockMvc mockMvc;

@@ -21,7 +21,10 @@ public class CategoriesUseCase implements ICategoriesServicePort {
     public Categories getCategoriesByName(String name) {return categoryPersistencePort.getCategoriesByName(name);}
 
     @Override
-    public List<Categories> getAllCategories(Integer page, Integer size) {return categoryPersistencePort.getAllCategories(page, size);}
+    public List<Categories> getAllCategories(Integer page,
+                                             Integer size,
+                                             String sortDirection) {
+        return categoryPersistencePort.getAllCategories(page, size, sortDirection);}
 
 
     @Override

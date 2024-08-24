@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ICategoriesEntityMapper {
-    Categories toModel(CategoriesEntity CategoriesEntity);
+    Categories toModel(CategoriesEntity categoriesEntity);
     CategoriesEntity toEntity(Categories categories);
     List<Categories> toModelList(List<CategoriesEntity> categoriesEntity);
 }

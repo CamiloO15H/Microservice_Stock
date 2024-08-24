@@ -3,7 +3,7 @@ package stock_microservice.configuration.exceptionhandler;
 import stock_microservice.adapters.driven.jpa.mysql.exception.CategoriesAlreadyExistsException;
 import stock_microservice.adapters.driven.jpa.mysql.exception.ElementNotFoundException;
 import stock_microservice.adapters.driven.jpa.mysql.exception.NoDataFoundException;
-import stock_microservice.configuration.Constants;
+import stock_microservice.configuration.constans.Constants;
 import stock_microservice.domain.exception.EmptyFieldException;
 import stock_microservice.domain.exception.NegativeNotAllowedException;
 import lombok.RequiredArgsConstructor;

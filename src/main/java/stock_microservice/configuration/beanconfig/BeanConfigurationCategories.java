@@ -1,4 +1,4 @@
-package stock_microservice.configuration;
+package stock_microservice.configuration.beanconfig;
 
 import stock_microservice.adapters.driven.jpa.mysql.adapter.CategoriesAdapter;
 import stock_microservice.adapters.driven.jpa.mysql.mapper.ICategoriesEntityMapper;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class BeanConfiguration {
+public class BeanConfigurationCategories {
     private final ICategoriesRepository categoriesRepository;
     private final ICategoriesEntityMapper categoriesEntityMapper;
 

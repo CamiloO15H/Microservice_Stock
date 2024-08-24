@@ -1,5 +1,6 @@
 package stock_microservice.adapters.driven.jpa.mysql.adapter;
 
+import org.springframework.data.domain.Sort;
 import stock_microservice.adapters.driven.jpa.mysql.entity.CategoriesEntity;
 import stock_microservice.adapters.driven.jpa.mysql.exception.CategoriesAlreadyExistsException;
 import stock_microservice.adapters.driven.jpa.mysql.exception.ElementNotFoundException;
@@ -28,8 +29,11 @@ public class CategoriesAdapter implements ICategoriesPersistencePort {
     }
 
     @Override
-    public List<Categories> getAllCategories(Integer page, Integer size) {
-        Pageable pagination = PageRequest.of(page, size);
+    public List<Categories> getAllCategories(Integer page, Integer size, String sortDirection) {
+        // Usa Sort.by para crear el objeto Sort y luego pásalo a PageRequest.of
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), "name");
+        Pageable pagination = PageRequest.of(page, size, sort);
+
         List<CategoriesEntity> categories = categoriesRepository.findAll(pagination).getContent();
         if (categories.isEmpty()) {
             throw new NoDataFoundException();

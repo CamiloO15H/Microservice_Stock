@@ -1,4 +1,4 @@
-package stock_microservice.configuration;
+package stock_microservice.configuration.constans;
 
 public class Constants {
     private Constants(){

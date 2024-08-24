@@ -8,7 +8,7 @@ public interface ICategoriesPersistencePort {
 
     void saveCategories(Categories categories);
 
-    List<Categories> getAllCategories(Integer page, Integer size);
+    List<Categories> getAllCategories(Integer page, Integer size, String sortDirection);
 
     Categories getCategoriesByName(String name);
 

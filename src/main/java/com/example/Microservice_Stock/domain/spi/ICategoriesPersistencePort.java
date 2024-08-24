@@ -1,16 +1,18 @@
 package com.example.Microservice_Stock.domain.spi;
+
 import com.example.Microservice_Stock.domain.model.Categories;
 import java.util.List;
 
 //SPI Extender capacidades de nuestro sistema
 public interface ICategoriesPersistencePort {
-    Void saveCategories(Categories categories);
 
-    List<Categories> getAllCategories();
+    void saveCategories(Categories categories);
 
-    Categories getCategory(Long name);
+    List<Categories> getAllCategories(Integer page, Integer size);
 
-    Void updateCategories(Categories categories);
+    Categories getCategoriesByName(String name);
 
-    Void deleteCategories(Long name);
+    Categories updateCategories(Categories categories);
+
+    void deleteCategories(Long id);
 }

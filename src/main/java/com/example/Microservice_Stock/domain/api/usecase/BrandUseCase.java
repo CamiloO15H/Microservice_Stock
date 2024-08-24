@@ -1,4 +1,4 @@
-package com.example.Microservice_Stock.domain.usecase;
+package com.example.Microservice_Stock.domain.api.usecase;
 import com.example.Microservice_Stock.domain.api.IBrandServicePort;
 import com.example.Microservice_Stock.domain.model.Brand;
 import com.example.Microservice_Stock.domain.spi.IBrandPersistencePort;

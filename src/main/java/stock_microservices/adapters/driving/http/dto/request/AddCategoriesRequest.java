@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class AddCategoriesRequest {
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
 }
 
 //Aca lo que debemos traer, no necesitamos el id

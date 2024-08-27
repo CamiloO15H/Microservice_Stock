@@ -9,6 +9,5 @@ import java.util.Optional;
 
 public interface BrandRepository extends JpaRepository<BrandEntity, Long> {
     Optional<BrandEntity> findByNameContaining(String name);
-    Optional<BrandEntity> findByName(String name);
     Page<BrandEntity> findAll(Pageable pageable);
 }

@@ -6,6 +6,9 @@ import lombok.*;
 @Entity
 @Table(name = "categories", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class CategoriesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

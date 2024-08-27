@@ -43,6 +43,12 @@ public class CategoriesRestControllerAdapter {
         Sort.Direction direction = Sort.Direction.fromString(sortDirection);
         Pageable pageable = PageRequest.of(page, size, direction, "name");
         Page<Categories> categoriesPage = categoriesServicePort.getAllCategories(pageable);
+
+        if (categoriesPage == null || categoriesPage.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+
         List<CategoriesResponse> responseList = categoriesResponseMapper.toCategoriesResponseList(categoriesPage.getContent());
         Page<CategoriesResponse> responsePage = new PageImpl<>(responseList, pageable, categoriesPage.getTotalElements());
         return ResponseEntity.ok(responsePage);
@@ -59,7 +65,8 @@ public class CategoriesRestControllerAdapter {
     @PutMapping("/")
     public ResponseEntity<CategoriesResponse> updateCategories(@RequestBody UpdateCategoriesRequest request) {
         return ResponseEntity.ok(categoriesResponseMapper.toCategoriesResponse(
-                categoriesServicePort.updateCategories(categoriesRequestMapper.updateRequestToCategories(request))));
+                categoriesServicePort.updateCategories(categoriesRequestMapper.updateRequestToCategories(request))
+        ));
     }
 
     // Endpoint para eliminar una categoría por ID

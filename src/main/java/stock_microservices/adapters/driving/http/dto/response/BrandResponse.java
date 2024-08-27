@@ -1,10 +1,10 @@
 package stock_microservices.adapters.driving.http.dto.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
 @AllArgsConstructor
-@Getter
+@Data
 public class BrandResponse {
     private Long id;
     private String name;

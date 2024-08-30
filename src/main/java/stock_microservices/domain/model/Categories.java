@@ -17,6 +17,5 @@ public class Categories { //IDENTIDAD
     public String getName() {return name;}
 
     public String getDescription() {return description;}
-
 }
 

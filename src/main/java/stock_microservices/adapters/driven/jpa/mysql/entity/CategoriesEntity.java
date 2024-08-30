@@ -3,6 +3,8 @@ package stock_microservices.adapters.driven.jpa.mysql.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "categories", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 @Data
@@ -15,4 +17,7 @@ public class CategoriesEntity {
     private Long id;
     private String name;
     private String description;
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<ArticleEntity> article;
 }

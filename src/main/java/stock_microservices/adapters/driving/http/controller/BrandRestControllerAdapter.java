@@ -34,8 +34,8 @@ public class BrandRestControllerAdapter {
 
     @GetMapping("/")
     public ResponseEntity<Page<BrandResponse>> getAllBrand(@RequestParam(defaultValue = "0") int page,
-                                                            @RequestParam(defaultValue = "10") int size,
-                                                            @RequestParam(defaultValue = "asc") String sortDirection) {
+                                                                                                                @RequestParam(defaultValue = "10") int size,
+                                                                                                                @RequestParam(defaultValue = "asc") String sortDirection) {
         Sort.Direction direction = Sort.Direction.fromString(sortDirection);
         Pageable pageable = PageRequest.of(page, size, direction, "name");
         Page<Brand> brandsPage = brandServicePort.getAllBrand(pageable);

@@ -10,7 +10,6 @@ import java.util.Optional;
     //El repositorio JPA proporciona una interfaz para acceder y manipular la base de datos.
 
 public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> {
-    Optional<ArticleEntity> findByNameContaining(String name);
     Optional<ArticleEntity> findByName(String name);
     Page<ArticleEntity> findAll(Pageable pageable);
 }

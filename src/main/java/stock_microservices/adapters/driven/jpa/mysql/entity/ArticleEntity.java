@@ -2,7 +2,7 @@ package stock_microservices.adapters.driven.jpa.mysql.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
+import java.util.Set;
 
 @Entity
 @Table(name = "Article")
@@ -19,25 +19,18 @@ public class ArticleEntity {
     private Long id;
     private String name;
     private String description;
-
-    @Column(name = "amount", nullable = false)
     private int amount;
-
-    @Column(name = "price", nullable = false)
     private Double price;
 
-    @Column(name = "id_categories")
-    private Long idCategories;
+    @ManyToOne
+    @JoinColumn(name = "id_brand", nullable = false)
+    private BrandEntity brand;
 
-    @Column(name = "id_brand")
-    private Long idBrand;
-
-    // Si la relación es bidireccional, puede ser necesario usar @ManyToMany o @OneToMany en lugar de @Column
-    // @ManyToMany
-    // @JoinTable(
-    //     name = "Articulo_Categoria",
-    //     joinColumns = @JoinColumn(name = "articulo_id"),
-    //     inverseJoinColumns = @JoinColumn(name = "categoria_id")
-    // )
-    // private Set<CategoryEntity> categories;
+    @ManyToMany
+    @JoinTable(
+            name = "article_categories",
+            joinColumns = @JoinColumn(name = "article_id"),
+            inverseJoinColumns = @JoinColumn(name = "categories_id")
+    )
+    private Set<CategoriesEntity> categories;
 }

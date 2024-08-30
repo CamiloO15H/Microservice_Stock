@@ -1,7 +1,7 @@
 package stock_microservices.adapters.driving.http.controller;
 
+import org.springframework.data.domain.*;
 import stock_microservices.adapters.driving.http.dto.request.AddArticleRequest;
-import stock_microservices.adapters.driving.http.dto.request.UpdateArticleRequest;
 import stock_microservices.adapters.driving.http.dto.response.ArticleResponse;
 import stock_microservices.adapters.driving.http.mapper.ArticleRequestMapper;
 import stock_microservices.adapters.driving.http.mapper.ArticleResponseMapper;
@@ -23,12 +23,11 @@ public class ArticleRestControllerAdapter {
     private final ArticleRequestMapper articleRequestMapper;
     private final ArticleResponseMapper articleResponseMapper;
 
-
-
     @PostMapping("/")
-    public ResponseEntity<Void> createArticle(@RequestBody AddArticleRequest request) {
-        articleServicePort.createArticle(articleRequestMapper.addRequestToArticle(request));
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Article> createArticle(@RequestBody AddArticleRequest request) {
+        Article article = articleRequestMapper.toArticle(request);
+        articleServicePort.createArticle(article);
+        return new ResponseEntity<>(article, HttpStatus.CREATED);
     }
 
     @GetMapping("/search/{name}")
@@ -38,25 +37,15 @@ public class ArticleRestControllerAdapter {
         }
 
     @GetMapping("/")
-    public ResponseEntity<List<ArticleResponse>> getAllArticles(@RequestParam Integer page,
-                                                                @RequestParam Integer size,
-                                                                @RequestParam String sortDirection) {
-
-        List<Article> articles = articleServicePort.getAllArticles(page, size, sortDirection);
-        return ResponseEntity.ok(articleResponseMapper.toArticleResponseList(articles));
-    }
-
-    @PutMapping("/")
-    public ResponseEntity<ArticleResponse> updateArticle(@RequestBody UpdateArticleRequest request) {
-        return ResponseEntity.ok(articleResponseMapper.toArticleResponse(
-                articleServicePort.updateArticle(articleRequestMapper.updateRequestToArticle(request))
-        ));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
-        articleServicePort.deleteArticle(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Page<ArticleResponse>> getAllArticles(@RequestParam(defaultValue = "0") int page,
+                                                                @RequestParam(defaultValue = "10") int size,
+                                                                @RequestParam(defaultValue = "asc") String sortDirection) {
+        Sort.Direction direction = Sort.Direction.fromString(sortDirection);
+        Pageable pageable = PageRequest.of(page, size, direction, "name");
+        Page<Article> articlesPage = articleServicePort.getAllArticles(pageable);
+        List<ArticleResponse> responseList = articleResponseMapper.toArticleResponseList(articlesPage.getContent());
+        Page<ArticleResponse> responsePage = new PageImpl<>(responseList, pageable, articlesPage.getTotalElements());
+        return ResponseEntity.ok(responsePage);
     }
 }
 

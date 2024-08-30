@@ -9,7 +9,6 @@ import stock_microservices.domain.spi.BrandPersistencePort;
 
 @Service
 public class BrandUseCase implements BrandServicePort {
-
     private final BrandPersistencePort brandPersistencePort;
 
     public BrandUseCase(BrandPersistencePort brandPersistencePort) { //Constructor
@@ -46,7 +45,7 @@ public class BrandUseCase implements BrandServicePort {
         if (brand.getName() == null || brand.getName().isBlank() || brand.getName().length() > 50) {
             throw new IllegalArgumentException("Invalid brand name");
         }
-        if (brand.getDescription() == null || brand.getDescription().isBlank() || brand.getDescription().length() > 90) {
+        if (brand.getDescription() == null || brand.getDescription().isBlank() || brand.getDescription().length() > 120) {
             throw new IllegalArgumentException("Invalid brand description");
         }
     }

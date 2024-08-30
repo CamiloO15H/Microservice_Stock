@@ -1,5 +1,7 @@
 package stock_microservices.domain.model;
 
+import java.util.Set;
+
 public class Article {
 
     private final Long id;
@@ -7,37 +9,52 @@ public class Article {
     private final String description;
     private final int amount;
     private final Double price;
-    private Long idCategories;
-    private Long idBrand;
+    private Brand brand;
+    private Set<Categories> categories; // Cambiado a Set para manejar múltiples categorías
 
-    public Article(Long id, String name, String description, int amount, Double price, Long idCategories, Long idBrand) {
+    public Article(Long id, String name, String description, int amount, Double price, Brand brand, Set<Categories> categories) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.amount = amount;
         this.price = price;
-        this.idCategories = idCategories;
-        this.idBrand = idBrand;
+        this.brand = brand;
+        this.categories = categories;
     }
 
-    public Long getId() {return id;}
+    public Long getId() {
+        return id;
+    }
 
-    public String getName() {return name;}
+    public String getName() {
+        return name;
+    }
 
-    public String getDescription() {return description;}
+    public String getDescription() {
+        return description;
+    }
 
-    public int getAmount() {return amount;}
+    public int getAmount() {
+        return amount;
+    }
 
-    public Double getPrice() {return price;}
+    public Double getPrice() {
+        return price;
+    }
 
-    public Long getIdCategories() {return idCategories;}
+    public Brand getBrand() {
+        return brand;
+    }
 
-    public void setIdCategories(Long idCategories) {this.idCategories = idCategories;}
+    public Set<Categories> getCategories() { // Devuelve un Set de categorías
+        return categories;
+    }
 
-    public Long getIdBrand() {return idBrand;}
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
 
-    public void setIdBrand(Long idBrand) {this.idBrand = idBrand;}
+    public void setCategories(Set<Categories> categories) { // Permite asignar un Set de categorías
+        this.categories = categories;
+    }
 }
-
-
-

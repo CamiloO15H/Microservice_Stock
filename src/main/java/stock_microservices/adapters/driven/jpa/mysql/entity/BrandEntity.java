@@ -3,6 +3,8 @@ package stock_microservices.adapters.driven.jpa.mysql.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "brand")
 @AllArgsConstructor
@@ -15,4 +17,5 @@ public class BrandEntity {
     private Long id;
     private String name;
     private String description;
+
 }

@@ -1,17 +1,12 @@
 package stock_microservices.domain.api;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import stock_microservices.domain.model.Article;
-import java.util.List;
 
 public interface ArticleServicePort {
 
     void createArticle(Article article);
-
-    List<Article> getAllArticles(Integer page, Integer size,String sortDirection);
-
+    Page<Article> getAllArticles(Pageable pageable);
     Article getArticleByName(String name);
-
-    Article updateArticle(Article article);
-
-    void deleteArticle(Long id);
 }

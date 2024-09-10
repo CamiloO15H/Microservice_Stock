@@ -1,15 +1,40 @@
 package stock_microservices.adapters.driven.jpa.mysql.mapper;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
+import org.springframework.data.domain.Page;
+import stock_microservices.adapters.driven.jpa.mysql.entity.ProductEntity;
 import stock_microservices.adapters.driven.jpa.mysql.entity.BrandEntity;
 import stock_microservices.domain.model.Brand;
+import stock_microservices.domain.utils.pagination.DomainPage;
+import stock_microservices.domain.model.Product;
 
-@Mapper(componentModel = "spring")
+import java.util.List;
+
+@Mapper(componentModel = "spring",
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface BrandEntityMapper {
-
-    @Mapping(source = "id", target = "id")
     BrandEntity toEntity(Brand brand);
-    Brand toModel(BrandEntity brandEntity);
-}
 
+    Brand toBrand(BrandEntity brandEntity);
+
+    @Named("brandWithoutProducts")
+    @Mapping(target = "products", ignore = true)
+    Brand withoutProducts(BrandEntity source);
+
+    @Mapping(target = "categories", ignore = true)
+    @Mapping(target = "brand", ignore = true)
+    Product toProduct(ProductEntity productEntity);
+
+    @IterableMapping(qualifiedByName = "brandWithoutProducts")
+    List<Brand> toBrands(List<BrandEntity> brandEntities);
+
+    @Mapping(target = "page", source = "number")
+    @Mapping(target = "pageSize", source = "size")
+    @Mapping(target = "totalPages", source = "totalPages")
+    @Mapping(target = "count", source = "numberOfElements")
+    @Mapping(target = "totalCount", source = "totalElements")
+    @Mapping(target = "content", source = "content")
+    @IterableMapping(qualifiedByName = "brandWithoutProducts")
+    DomainPage<Brand> toDomainPage(Page<BrandEntity> brandEntities);
+}

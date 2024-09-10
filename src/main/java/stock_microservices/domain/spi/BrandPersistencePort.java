@@ -1,18 +1,12 @@
 package stock_microservices.domain.spi;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import stock_microservices.domain.model.Brand;
+import stock_microservices.domain.utils.pagination.DomainPage;
+import stock_microservices.domain.utils.pagination.PaginationData;
 
 public interface BrandPersistencePort {
-
-    void createBrand(Brand brand);
-
-    Page<Brand> getAllBrand(Pageable pageable);
-
+    void save(Brand brand);
+    Brand getBrand(Long id);
     Brand getBrandByName(String name);
-
-    Brand updateBrand(Brand brand);
-
-    void deleteBrand(Long id);
+    DomainPage<Brand> getAllBrands(PaginationData paginationData);
 }
